@@ -5,6 +5,7 @@
 
 import pygame
 import random
+from pathlib import Path
 
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -32,9 +33,10 @@ class Planet(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        # load and convert image to be used for the planet
-        self.image = pygame.image.load(
-            "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\planet_img.jpg").convert()
+        # store absolute path in filename
+        filename = Path("planet_img.jpg").absolute()
+        # load filename as str(important) and convert image to be used for the planet
+        self.image = pygame.image.load(str(filename)).convert()
         self.rect = self.image.get_rect()
 
 
@@ -43,9 +45,10 @@ class Explosion(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        # load and convert image to be used for the explosion
-        self.image = pygame.image.load(
-            "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\explosion_img.jpg").convert()
+        # store absolute path in filename
+        filename = Path("explosion_img.jpg").absolute()
+        # load filename as str(important) and convert image to be used for the planet
+        self.image = pygame.image.load(str(filename)).convert()
         self.rect = self.image.get_rect()
 
 
@@ -54,9 +57,10 @@ class Asteroid(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        # load and convert image to be used for asteroids (asteroid is 16x14)
-        self.image = pygame.image.load(
-            "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\\asteroid_img.jpg").convert()
+        # store absolute path in filename
+        filename = Path("asteroid_img.jpg").absolute()
+        # load filename as str(important) and convert image to be used for the planet
+        self.image = pygame.image.load(str(filename)).convert()
         self.rect = self.image.get_rect()
 
 
@@ -65,9 +69,10 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        # load and convert image to be used as players ship (ship is 20x20)
-        self.image = pygame.image.load(
-            "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\ship_img.jpg").convert()
+        # store absolute path in filename
+        filename = Path("ship_img.jpg").absolute()
+        # load filename as str(important) and convert image to be used for the planet
+        self.image = pygame.image.load(str(filename)).convert()
         self.rect = self.image.get_rect()
 
 
@@ -84,8 +89,9 @@ class Laser(pygame.sprite.Sprite):
 
 # function to play music in background, infinite loop
 def music():
-    filename = "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\music.xm"
-    pygame.mixer.music.load(filename)
+    filename = Path("music.xm").absolute()
+    # load filename as str(important)
+    pygame.mixer.music.load(str(filename))
     pygame.mixer.music.play(-1, 0)
 
 
@@ -115,7 +121,9 @@ screen = pygame.display.set_mode(size)
 
 # window title and icon
 pygame.display.set_caption('Space Shooter')
-icon = pygame.image.load("D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\ship_img.jpg")
+filename = Path("ship_img.jpg").absolute()
+# load filename as str(important)
+icon = pygame.image.load(str(filename))
 pygame.display.set_icon(icon)
 
 # hide mouse cursor
@@ -173,8 +181,9 @@ while RUNNING:
             # play laser sound when left mouse button is clocked
             laser1 = Laser()
             laser2 = Laser()
-            filename1 = "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\laser_sound.wav"
-            sound1 = pygame.mixer.Sound(filename1)
+            filename = Path("laser_sound.wav").absolute()
+            # load filename as str(important)
+            sound1 = pygame.mixer.Sound(str(filename))
             sound1.set_volume(.1)
             sound1.play()
             # set initial laser position equal to the player position
@@ -237,8 +246,9 @@ while RUNNING:
 
     # if collision is detected between player and asteroid, remove the asteroid and deduct a life
     if collide:
-        filename2 = "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\hit_sound.wav"
-        sound2 = pygame.mixer.Sound(filename2)
+        filename = Path("hit_sound.wav").absolute()
+        # load filename as str(important)
+        sound2 = pygame.mixer.Sound(str(filename))
         sound2.set_volume(.2)
         sound2.play()
         shipHealth -= 20
@@ -250,8 +260,9 @@ while RUNNING:
     # if lives is less than zero, end game and display game over
     if shipHealth <= 0 or planetHealth <= 0:
         pygame.time.wait(500)
-        filename3 = "D:\DESKTOP\Career\Finished Projects for Github\Python\Space Shooter\explosion_sound.wav"
-        sound3 = pygame.mixer.Sound(filename3)
+        filename = Path("explosion_sound.wav").absolute()
+        # load filename as str(important)
+        sound3 = pygame.mixer.Sound(str(filename))
         sound3.set_volume(.5)
         sound3.play()
         # when game ends, remove sprites from list
